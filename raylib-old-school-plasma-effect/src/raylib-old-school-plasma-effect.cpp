@@ -30,7 +30,10 @@ int main() {
 
 	InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "OlD-ScHoOl PlAsMa eFfEcT");
 
-	Image image = LoadImage("../crysis-2.jpg");
+	//Image image = LoadImage("../crysis-2.jpg");
+
+	Image image = LoadImage("../one-screen-3-vanity.png");
+
 	ImageFormat(&image,PIXELFORMAT_UNCOMPRESSED_R8G8B8A8);
 	ImageResize(&image,WINDOW_WIDTH,WINDOW_HEIGHT);
 	Texture image_texture = LoadTextureFromImage(image);
@@ -60,7 +63,8 @@ int main() {
 	int input_image_location= rlGetLocationUniform(compute_shader_program,"u_input_image");
 
 	float current_time = 0;
-	float frequency[2] = {4,3};
+	float frequency[2] = {1,24};
+	SetTargetFPS(120);
 	// Main game loop
 	    while (!WindowShouldClose())        // Detect window close button or ESC key
 	    {
@@ -94,7 +98,7 @@ int main() {
 	        EndDrawing();
 
 	        //std::this_thread::sleep_for(std::chrono::milliseconds(10));
-	        current_time += 0.0001;
+	        current_time += 0.001;
 	        //----------------------------------------------------------------------------------
 	    }
 

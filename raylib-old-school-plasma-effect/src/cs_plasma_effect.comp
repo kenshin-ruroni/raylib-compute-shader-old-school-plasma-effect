@@ -20,24 +20,29 @@ void main()
     ivec2 pixel_screen_coord = ivec2( gl_GlobalInvocationID.x,  gl_GlobalInvocationID.y);
 
 	/*
-	int pixel_size = 2;
+	int pixel_size = 4;
 	float xx = pixel_screen_coord.x ;
 	xx/= pixel_size;
 	float yy = pixel_screen_coord.y ;
 	yy/=pixel_size;
 	pixel_screen_coord =  ivec2(floor(xx) * pixel_size,  floor(yy) * pixel_size);
-*/
+	*/
 	
+	int xc = size.x/2 +  int(100 * cos(PI_2 * 5 * (2 * time) ));
+	int yc = size.y/2 +  int(size.y *  cos(PI_2  * time ) );
 
 	float period_x = 1./frequency.x;
+	float period_y = 1./frequency.y;
 
 	float Y = pixel_screen_coord.y/(size.y - 1.) *  period_x; // 
 
 	vec4 inPixel = imageLoad(u_input_image, pixel_screen_coord);
 
-	int x = int( pixel_screen_coord.x + 128 * (   cos( PI_2 * frequency.x* (time + Y) ) ) ) ; // sin(PI_2 * frequency.x * time - 0.01 * pixel_screen_coord.y) );
+	int x =  int( pixel_screen_coord.x + 60 *    cos( PI_2 * frequency.x* (time + Y) )  ) ;
 
-	int y = pixel_screen_coord.y;
+	float X = pixel_screen_coord.x/(size.x - 1.) *  period_y; // 
+
+	int y =  int( pixel_screen_coord.y + size.y/2 *    sin( PI_2 * frequency.x* (time + X) )  ) ;
 	
 	if ( x >= size.x)
 	{
@@ -47,8 +52,20 @@ void main()
 	{
 	 	x = size.x + x;
 	}
-	
-	imageStore(u_output_image, ivec2(x,y), inPixel);
+
+	if ( y >= size.y)
+	{
+		y -= size.y;
+	}
+	else if ( y < 0) 
+	{
+	 	y = size.y + y;
+	}
+
+
+
+	float depth =  1 - 0.4 * cos( PI_2 * 6 * time - 0.025 *sqrt(  (1 + 0.5 * cos(PI_2 * 0.01 * time )) * (x-xc)*(x-xc)  + (1 + 0.05 * sin(PI_2 * 100 * time )) * (y-yc)*(y-yc) ) ) ;
+	imageStore(u_output_image, ivec2(x,y), inPixel* depth );
 
 }
  

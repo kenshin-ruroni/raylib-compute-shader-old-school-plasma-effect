@@ -9,3 +9,7 @@ A first glimpse of a compute shader retro from the famous and impressive One-Scr
 the same effect on a HD image
 
 ![Alt text](crysis-2.png)
+
+bi directional displacement
+
+![Alt text](osc3-bidirectional-displacement.png)

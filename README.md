@@ -2,7 +2,7 @@
 
 A old-school plasma effect rendered from a compute shader. WIP
 
-A first glimpse of a compute shader retro from the famous and impressive One-Screen-Colony CPC demo:
+A first glimpse of a compute shader retro from the famous and impressive One-Screen-Colony 3 CPC demo:
 
 ![Alt text](osc3-vanity.png)
 

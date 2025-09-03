@@ -13,3 +13,9 @@ the same effect on a HD image
 bi directional displacement
 
 ![Alt text](osc3-bidirectional-displacement.png)
+
+adding wter ripples
+
+![Alt text](first_test.png)
+
+![Alt text](first_test1.png)

@@ -28,7 +28,7 @@ void main()
 	pixel_screen_coord =  ivec2(floor(xx) * pixel_size,  floor(yy) * pixel_size);
 	*/
 	
-	int xc = size.x/2 +  int(100 * cos(PI_2 * 5 * (2 * time) ));
+	int xc = size.x/2 +  int(100 * cos(PI_2 * (4 * time) ));
 	int yc = size.y/2 +  int(size.y *  cos(PI_2  * time ) );
 
 	float period_x = 1./frequency.x;
@@ -38,12 +38,17 @@ void main()
 
 	vec4 inPixel = imageLoad(u_input_image, pixel_screen_coord);
 
-	int x =  int( pixel_screen_coord.x + 60 *    cos( PI_2 * frequency.x* (time + Y) )  ) ;
+	int x =  int( pixel_screen_coord.x + 100*    cos( PI_2 * frequency.x* (time + Y) )  ) ;
 
 	float X = pixel_screen_coord.x/(size.x - 1.) *  period_y; // 
 
-	int y =  int( pixel_screen_coord.y + size.y/2 *    sin( PI_2 * frequency.x* (time + X) )  ) ;
+	int y =  int( pixel_screen_coord.y + 150 *    sin( PI_2 * frequency.x* (time + X) )  ) ;
 	
+	float phase = cos( PI_2 * 2 * time - 0.015 *sqrt(  (x-xc)*(x-xc)  +  (y-yc)*(y-yc) ) );
+
+	x += int(20*phase);
+	y += int(2 * phase);
+
 	if ( x >= size.x)
 	{
 		x -= size.x;
@@ -63,9 +68,10 @@ void main()
 	}
 
 
-
-	float depth =  1 - 0.4 * cos( PI_2 * 6 * time - 0.025 *sqrt(  (1 + 0.5 * cos(PI_2 * 0.01 * time )) * (x-xc)*(x-xc)  + (1 + 0.05 * sin(PI_2 * 100 * time )) * (y-yc)*(y-yc) ) ) ;
-	imageStore(u_output_image, ivec2(x,y), inPixel* depth );
+	//imageStore(u_output_image , ivec2(x,y), vec4(0,0,0,0) );
+	
+	float depth =  1 - 0.40 *phase ;
+	imageStore(u_output_image , ivec2(x,y), inPixel* depth );
 
 }
  

@@ -14,7 +14,7 @@ bi directional displacement
 
 ![Alt text](osc3-bidirectional-displacement.png)
 
-adding wter ripples
+adding moving water ripples
 
 ![Alt text](first_test.png)
 
